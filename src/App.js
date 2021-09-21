@@ -4,7 +4,7 @@ import Template from "./components/Template";
 import TodoList from "./components/TodoList";
 import { MdAddCircle } from "react-icons/md";
 import TodoInsert from "./components/TodoInsert";
-
+ 
 let nextId = 4;
 
 const App = () => {
@@ -54,6 +54,10 @@ const App = () => {
         (todo.id === id? {...todo, checked: !todo.checked}: todo))) 
   };
 
+  const onChangeSelectedTodo = (todo) =>{
+    setSelectedTodo(todo);
+  }
+
   return (
     <Template todoLength={todos.length}>
       <TodoList
@@ -61,12 +65,14 @@ const App = () => {
         onCheckToggle={onCheckToggle}
         onInsertToggle={onInsertToggle}
         onCheckToggle = {onCheckToggle}
+        onChangeSelectedTodo = {onChangeSelectedTodo}
       />
       <div className="add-todo-button" onClick={onInsertToggle}>
         <MdAddCircle />
       </div>
       {insertToggle && (
         <TodoInsert
+          selectedTodo ={selectedTodo}
           onInsertToggle={onInsertToggle}
           onInsertTodo={onInsertTodo}
         />
@@ -74,5 +80,7 @@ const App = () => {
     </Template>
   );
 };
+
+//분기점
 
 export default App;

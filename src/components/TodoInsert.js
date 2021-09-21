@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { MdAddCircle } from "react-icons/md";
+import { MdAddCircle} from "react-icons/md";
+import{ TiPencil, TiTrash } from "react-icons/ti"
 import "./TodoInsert.css";
 
 const TodoInsert = ({
   onInsertToggle,
-  onInsertTodo
+  onInsertTodo,
+  selectedTodo
 }) => {
   const [value, setValue] = useState("");
 
@@ -19,6 +21,13 @@ const TodoInsert = ({
     onInsertToggle();
   };
 
+  useEffect(() =>{
+    if(selectedTodo){
+        setValue(selectedTodo.text)
+    }
+    } , [selectedTodo]
+    //이 부분 잘 모르겠음 , 인자들의 의존성이 ㅜ머야?
+    );
   return (
     <div>
       <div className="background" onClick={onInsertToggle}></div>
@@ -28,9 +37,15 @@ const TodoInsert = ({
           value={value}
           onChange={onChange}
         ></input>
+          {selectedTodo ? (
+            <div className="rewrite">
+                <TiPencil />
+                <TiTrash /></div>
+            ): (
           <button type="submit">
             <MdAddCircle />
           </button>
+          )}
       </form>
     </div>
   );
