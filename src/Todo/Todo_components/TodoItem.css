@@ -1,12 +1,8 @@
 .TodoItem{
-    margin-right: auto;
-    margin-left: auto;
-
-    border-radius: 5px;
-    box-shadow: 1px 2px 5px 1px #f67280;
-    padding: 1rem;
     display: flex;
     align-items: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 
 .TodoItem + .TodoItem{
@@ -22,12 +18,13 @@
 
 .content svg{
     font-size: 1.5rem;
-    color: #f67280;
+    color: #20c997;
 }
 
 .content .text {
-    margin-left: 0.5 rem;
     flex: 1;
+    font-size: 21px;
+    color: #495057;
 }
 
 .content .checked .text{

@@ -1,86 +1,23 @@
 import React, { useState } from "react";
 import "./App.css";
-import Template from "./components/Template";
-import TodoList from "./components/TodoList";
-import { MdAddCircle } from "react-icons/md";
-import TodoInsert from "./components/TodoInsert";
- 
-let nextId = 4;
+import Todo_App from "./Todo/Todo_App";
+import {createGlobalStyle} from 'styled-components';
+import TimeTree from "./TimeTree/TimeTree_App";
 
-const App = () => {
-  const [selectedTodo, setSelectedTodo] = useState(null);
-  const [insertToggle, setInsertToggle] = useState(false);
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      text: "할일 1",
-      checked: true
-    },
-    {
-      id: 2,
-      text: "할일 2",
-      checked: false
-    },
-    {
-      id: 3,
-      text: "할일 3",
-      checked: true
-    }
-  ]);
-
-  const onInsertToggle = () => {
-    if (selectedTodo) {
-      setSelectedTodo(null);
-    }
-    setInsertToggle(prev => !prev);
-  };
-
-  const onInsertTodo = text => {
-    if (text === "") {
-      return alert("할 일을 입력해주세요.");
-    } else {
-      const todo = {
-        id: nextId,
-        text,
-        checked: false
-      };
-      setTodos(todos => todos.concat(todo));
-      nextId++;
-    }
-  };
-  const onCheckToggle = (id) => {
-    setTodos(todos =>
-       todos.map(todo => 
-        (todo.id === id? {...todo, checked: !todo.checked}: todo))) 
-  };
-
-  const onChangeSelectedTodo = (todo) =>{
-    setSelectedTodo(todo);
+const App =()=>{
+  
+  const GlobalStyle = createGlobalStyle`
+  body {
+    background: #e9ecef;
   }
+`;
 
   return (
-    <Template todoLength={todos.length}>
-      <TodoList
-        todos={todos}
-        onCheckToggle={onCheckToggle}
-        onInsertToggle={onInsertToggle}
-        onCheckToggle = {onCheckToggle}
-        onChangeSelectedTodo = {onChangeSelectedTodo}
-      />
-      <div className="add-todo-button" onClick={onInsertToggle}>
-        <MdAddCircle />
-      </div>
-      {insertToggle && (
-        <TodoInsert
-          selectedTodo ={selectedTodo}
-          onInsertToggle={onInsertToggle}
-          onInsertTodo={onInsertTodo}
-        />
-      )}
-    </Template>
+    <>
+    <GlobalStyle />
+    <Todo_App />
+    <TimeTree />
+  </>
   );
-};
-
-//분기점
-
+}
 export default App;
